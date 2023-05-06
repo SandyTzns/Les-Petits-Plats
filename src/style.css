@@ -1,0 +1,31 @@
+header {
+  display: flex;
+  justify-content: center;
+}
+
+#logo {
+  margin-top: 42px;
+  height: 93px;
+  width: auto;
+  margin-bottom: 20px;
+}
+
+#search {
+  margin: 0 auto;
+  display: flex;
+}
+
+#search input {
+  position: relative;
+  height: 69px;
+  border-radius: 5px;
+  background-color: #e7e7e7;
+  z-index: 0;
+}
+
+#search-btn {
+  position: absolute;
+  right: 160px;
+  z-index: 1;
+  top: 173px;
+}
