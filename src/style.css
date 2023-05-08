@@ -24,13 +24,11 @@ header {
 }
 
 /* Search input */
-.searchbar {
-  margin-bottom: 30px;
-}
 
 #search {
   margin: 0 auto;
   display: flex;
+  padding: 0;
 }
 
 #search input {
@@ -38,7 +36,6 @@ header {
   border-radius: 5px 0 0 5px;
   border-right: none;
   background-color: #e7e7e7;
-  z-index: 0;
 }
 
 .image {
@@ -57,7 +54,7 @@ header {
 .filteredby {
   display: flex;
   align-items: center;
-  margin-left: 120px;
+  /* margin-left: 120px; */
 }
 
 .item {
