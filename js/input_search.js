@@ -3,29 +3,33 @@ let search_input = document.getElementById("search_input");
 // EVENT LISTENER POUR RECUPERER LA VALEUR DE L'INPUT DE RECHERCHE
 search_input.addEventListener("change", filtrer_les_elements);
 
+// FUNCTION RECUPERE LA VALEUR DE L'INPUT ET BOUCLE LA LISTE DES RECETTE POUR TROUVER UN MATCH
+let filtered_recipes = [];
+
 function filtrer_les_elements() {
   let value = search_input.value.toLowerCase();
   section_card.innerHTML = "";
 
-  let recettes_filtres = recipes.filter((element) => {
-    return (
-      element.name.toLowerCase().includes(value) ||
-      element.description.toLowerCase().includes(value) ||
-      element.ingredients.some((ing) => {
-        return ing.ingredient.toLowerCase().includes(value);
-      })
-    );
-  });
+  for (let i = 0; i < recipes.length; i++) {
+    let name = recipes[i].name.toLowerCase();
+    let description = recipes[i].description.toLowerCase();
+    let ingredient = recipes[i].ingredients
+      .toLowerCase()
+      .map((ingr) => ingr.ingredient, []);
 
-  if (recettes_filtres.length === 0) {
-    section_card.innerHTML = `<h6>Aucune recette ne correspond à votre critère… vous pouvez
-    chercher « tarte aux pommes », « poisson », etc.</h6>`;
-  } else {
-    recettes_filtres.forEach((element) => {
-      displayCard(element);
-    });
+    if (
+      name.includes(value) ||
+      description.includes(value) ||
+      ingredient.includes(value)
+    ) {
+      filtered_recipes.push(recipes[i]);
+    }
   }
+  filtered_recipes.forEach((recipe) => {
+    displayCard(recipe);
+  });
 }
+
 // DISPLAY LES CARTES DE RECETTES FILTRÉS AVEC LA VALEUR DE L'INPUT
 function displayCard(objet) {
   let liste = "";
