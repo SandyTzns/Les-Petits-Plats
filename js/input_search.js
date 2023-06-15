@@ -7,15 +7,42 @@ function filtrer_les_elements() {
   let value = search_input.value.toLowerCase();
   section_card.innerHTML = "";
 
-  let recettes_filtres = recipes.filter((element) => {
-    return (
-      element.name.toLowerCase().includes(value) ||
-      element.description.toLowerCase().includes(value) ||
-      element.ingredients.some((ing) => {
-        return ing.ingredient.toLowerCase().includes(value);
-      })
-    );
-  });
+  let recettes_filtres = recipes
+    .filter((element) => {
+      return (
+        element.name.toLowerCase().includes(value) ||
+        element.description.toLowerCase().includes(value) ||
+        element.ingredients.some((ing) => {
+          return ing.ingredient.toLowerCase().includes(value);
+        })
+      );
+    })
+
+    .filter((element) => {
+      if (liste_ustensil_cliqué.length != 0) {
+        return liste_ustensil_cliqué.some((us_cliqué) => {
+          return element.ustensils.includes(us_cliqué);
+        });
+      } else {
+        return element;
+      }
+    })
+    .filter((element) => {
+      if (liste_appareil_cliqué.length != 0) {
+        return liste_appareil_cliqué.includes(element.appliance);
+      } else {
+        return element;
+      }
+    })
+    .filter((recette) => {
+      if (liste_ingredient_cliqué.length != 0) {
+        return recette.ingredients.some((ing) => {
+          return liste_ingredient_cliqué.includes(ing.ingredient.toLowerCase());
+        });
+      } else {
+        return recette;
+      }
+    });
 
   if (recettes_filtres.length === 0) {
     section_card.innerHTML = `<h6>Aucune recette ne correspond à votre critère… vous pouvez

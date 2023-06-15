@@ -99,7 +99,7 @@ input_ingredient.addEventListener("input", find_ingredient);
 function find_ingredient() {
   bottoms[0].innerHTML = "";
   ingredients_li = "";
-   liste_ingredients
+  liste_ingredients
     .filter((element) => {
       return element
         .toLowerCase()
